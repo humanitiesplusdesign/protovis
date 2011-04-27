@@ -7292,12 +7292,13 @@ pv.Mark.prototype.buildImplied = function(s) {
 pv.Mark.prototype.mouse = function() {
 
   /* Compute xy-coordinates relative to the panel. */
-  var x = pv.event.pageX || 0,
-      y = pv.event.pageY || 0,
+  var x = pv.event.pageY || 0,
+      y = pv.event.pageX || 0,
       n = this.root.canvas();
   do {
-    x -= n.offsetLeft;
-    y -= n.offsetTop;
+    x -= 15;//n.offsetTop;//-webkit-transform-origin:15px // not sure how this constant is computed
+    x=this.root.width()-x;
+    y -= n.offsetLeft;
   } while (n = n.offsetParent);
 
   /* Compute the inverse transform of all enclosing panels. */
